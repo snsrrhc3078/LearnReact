@@ -10,15 +10,15 @@
     const root = document.getElementById("root");
     const Container = () => {
       const [amount, setAmount] = React.useState(0);
-      const [flipped, setFlipped] = React.useState(false);
+      const [inverted, setInverted] = React.useState(false);
       const onChange = (event) => {
         setAmount(event.target.value);
       };
       const reset = () => {
         setAmount(0);
       };
-      const onFlip = () => {
-        setFlipped((current) => !current);
+      const onInvert = () => {
+        setInverted((current) => !current);
         reset();
       };
       return (
@@ -27,23 +27,25 @@
           <label htmlFor="minute">Minutes</label>
           <input
             onChange={onChange}
-            value={flipped ? amount * 60 : amount}
+            value={inverted ? amount * 60 : amount}
             id="minute"
             placeholder="Minutes"
             type="number"
-            disabled={flipped}
+            disabled={inverted}
           />
           <label htmlFor="hours">Hours</label>
           <input
             onChange={onChange}
-            value={flipped ? amount : amount / 60}
+            value={inverted ? amount : amount / 60}
             id="hours"
             placeholder="Hours"
             type="number"
-            disabled={!flipped}
+            disabled={!inverted}
           />
           <button onClick={reset}>Reset</button>
-          <button onClick={onFlip}>Flip</button>
+          <button onClick={onInvert}>
+            {inverted ? "Turn back" : "Invert"}
+          </button>
         </div>
       );
     };
